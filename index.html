@@ -502,13 +502,12 @@ section{padding:140px 0;position:relative}
 /* ============ BOWL SCROLL ANIMATION ============ */
 .bowl-scroll{
   position:relative;
-  height:260vh;
+  height:200vh;
   padding:0;
   background:
     radial-gradient(ellipse at 50% 35%, rgba(212,164,100,.10) 0%, transparent 55%),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 60%, var(--bg) 100%);
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 55%, var(--bg) 100%);
   border-bottom:1px solid var(--line-soft);
-  overflow:hidden;
 }
 .bowl-scroll::before{
   content:"";
@@ -524,21 +523,22 @@ section{padding:140px 0;position:relative}
   top:0;
   height:100vh;
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:minmax(360px,1fr) minmax(0,1.2fr);
   align-items:center;
-  gap:60px;
+  gap:48px;
   width:min(1320px,92vw);
   margin:0 auto;
+  padding:80px 0 60px;
 }
 .bowl-scroll__text{
-  max-width:480px;
+  max-width:460px;
   position:relative;
   z-index:2;
 }
 .bowl-scroll__text .overline{display:block;margin-bottom:18px}
 .bowl-scroll__text h2{
-  font-size:clamp(38px,5vw,68px);
-  margin:0 0 26px;
+  font-size:clamp(38px,4.6vw,64px);
+  margin:0 0 24px;
   letter-spacing:.01em;
 }
 .bowl-scroll__text h2 em{
@@ -553,7 +553,7 @@ section{padding:140px 0;position:relative}
   margin-bottom:14px;
 }
 .bowl-scroll__progress{
-  margin-top:32px;
+  margin-top:28px;
   display:flex;
   align-items:center;
   gap:14px;
@@ -574,32 +574,34 @@ section{padding:140px 0;position:relative}
   inset:0 auto 0 0;
   width:0%;
   background:linear-gradient(90deg, var(--accent-dark), var(--accent), var(--accent-light));
-  transition:width .12s linear;
 }
+.bowl-scroll__sticky > *{align-self:center}
 .bowl-scroll__stage{
   position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
-  height:100%;
+  align-self:stretch;
 }
 .bowl-scroll__stage::before{
   content:"";
   position:absolute;
-  width:78%;
-  aspect-ratio:1;
-  bottom:8%;
-  left:11%;
-  background:radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.55) 0%, transparent 65%);
-  filter:blur(20px);
+  width:64%;
+  aspect-ratio:2/1;
+  bottom:6%;
+  left:18%;
+  background:radial-gradient(ellipse at 50% 50%, rgba(0,0,0,.6) 0%, transparent 65%);
+  filter:blur(24px);
   z-index:0;
+  pointer-events:none;
 }
 .bowl-canvas{
   position:relative;
   z-index:1;
+  display:block;
   width:auto;
-  height:min(82vh,760px);
   max-width:100%;
+  height:min(86vh, 920px);
   filter:
     drop-shadow(0 50px 60px rgba(0,0,0,.55))
     drop-shadow(0 20px 30px rgba(0,0,0,.4));
@@ -966,35 +968,28 @@ section{padding:140px 0;position:relative}
     const FRAMES = 45;
     const W = 720, H = 960;
     const ctx = canvas.getContext('2d');
-    const images = [];
-    let lastFrame = -1;
+    const images = new Array(FRAMES);
+    let targetFrame = 0;
+    let drawnFrame = -1;
 
     function pad(n){ return String(n).padStart(3,'0'); }
 
-    function draw(idx){
-      idx = Math.max(0, Math.min(FRAMES-1, idx|0));
-      if (idx === lastFrame) return;
+    function drawTarget(){
+      const idx = Math.max(0, Math.min(FRAMES-1, targetFrame));
       const img = images[idx];
-      if (!img || !img.complete || img.naturalWidth === 0){
-        // fall back to last successfully drawn frame; keep lastFrame so we retry
-        return;
-      }
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+      if (idx === drawnFrame) return;
       ctx.clearRect(0,0,W,H);
       ctx.drawImage(img, 0, 0, W, H);
-      lastFrame = idx;
+      drawnFrame = idx;
     }
 
-    // Preload all 45 frames
     for (let i=1; i<=FRAMES; i++){
       const img = new Image();
       img.decoding = 'async';
       img.src = 'assets/bowl-frames/frame-'+pad(i)+'.webp';
-      img.onload = () => {
-        if (i === 1 && lastFrame === -1) draw(0);
-        // re-draw if user is currently looking at this frame
-        if (i-1 === lastFrame+1) requestUpdate();
-      };
-      images.push(img);
+      img.onload = drawTarget;        // any frame loading retriggers a draw at current target
+      images[i-1] = img;
     }
 
     let ticking = false;
@@ -1008,12 +1003,11 @@ section{padding:140px 0;position:relative}
       ticking = false;
       const rect = section.getBoundingClientRect();
       const total = section.offsetHeight - window.innerHeight;
-      if (total <= 0) return draw(0);
-      let progress = (-rect.top) / total;
+      let progress = total > 0 ? (-rect.top) / total : 0;
       progress = Math.max(0, Math.min(1, progress));
-      const idx = Math.round(progress * (FRAMES-1));
-      draw(idx);
-      if (bar) bar.style.width = (progress*100).toFixed(1) + '%';
+      targetFrame = Math.round(progress * (FRAMES-1));
+      drawTarget();
+      if (bar) bar.style.width = (progress*100).toFixed(2) + '%';
     }
 
     window.addEventListener('scroll', requestUpdate, {passive:true});
