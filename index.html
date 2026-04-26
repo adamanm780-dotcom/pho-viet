@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pho Viet — Indochine Küche · Mainz</title>
+<meta name="description" content="Pho Viet in Mainz. Authentische vietnamesische und indochinesische Küche – frisch, vegan-fähig, fein gewürzt. Franziskanerstraße 5, 55116 Mainz." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/hero.webp" fetchpriority="high" />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Italiana&display=swap" onload="this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Italiana&display=swap" /></noscript>
+
+<style>
+/* ============ RESET ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--cream);
+  overflow-x:hidden;
+  font-weight:300;
+  line-height:1.7;
+  letter-spacing:.01em;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;border:none;background:none;cursor:pointer;color:inherit}
+
+/* ============ TOKENS ============ */
+:root{
+  --bg-deep:#070503;
+  --bg:#0e0a06;
+  --bg-raised:#171108;
+  --bg-elevated:#22180e;
+  --accent:#d4a464;
+  --accent-light:#e8c486;
+  --accent-dark:#a87a3a;
+  --accent-red:#c1392b;
+  --accent-green:#7a9858;
+  --ivory:#f4eada;
+  --cream:#d8c8aa;
+  --muted:#8a7a66;
+  --line:rgba(212,164,100,.28);
+  --line-soft:rgba(212,164,100,.12);
+  --shadow-lg:0 40px 80px -30px rgba(0,0,0,.7);
+  --r-sm:6px;
+  --r-md:12px;
+  --r-lg:18px;
+  --r-xl:24px;
+}
+
+/* ============ TYPOGRAPHY ============ */
+.serif{font-family:'Cormorant Garamond',serif;font-weight:400;letter-spacing:.02em}
+.display{font-family:'Italiana',serif;letter-spacing:.08em}
+.overline{
+  font-family:'Inter',sans-serif;
+  font-size:11px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--accent);
+  font-weight:500;
+}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400;color:var(--ivory);line-height:1.12}
+
+/* ============ LAYOUT ============ */
+.container{width:min(1320px,92vw);margin:0 auto}
+section{padding:140px 0;position:relative}
+@media (max-width:768px){section{padding:90px 0}}
+
+/* ============ GOLD LINE DIVIDERS ============ */
+.gold-line{
+  display:inline-flex;align-items:center;gap:14px;
+  color:var(--accent);font-size:11px;letter-spacing:.4em;text-transform:uppercase
+}
+.gold-line::before,.gold-line::after{
+  content:"";display:inline-block;width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)
+}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  background:linear-gradient(90deg,#070503,#1a1108,#070503);
+  border-bottom:1px solid var(--line-soft);
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--cream);
+}
+.topbar a{color:var(--cream)}
+.topbar a:hover{color:var(--accent-light) !important}
+.topbar .inner{display:flex;justify-content:space-between;align-items:center;padding:10px 0;gap:18px;flex-wrap:wrap}
+.topbar .right{display:flex;gap:22px}
+@media (max-width:768px){.topbar .hide-mobile{display:none}}
+
+/* ============ HEADER ============ */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:
+    linear-gradient(rgba(14,10,6,.78),rgba(23,17,8,.82));
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.header-inner{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:22px 0;
+  gap:30px;
+}
+.header-logo{justify-self:center;display:flex;align-items:center;flex-direction:column;gap:4px}
+.header-logo .mark{
+  font-family:'Italiana',serif;
+  font-size:28px;
+  letter-spacing:.18em;
+  color:var(--ivory);
+  text-transform:uppercase;
+}
+.header-logo .submark{
+  font-family:'Inter',sans-serif;
+  font-size:9px;
+  letter-spacing:.5em;
+  text-transform:uppercase;
+  color:var(--accent);
+}
+
+.nav{display:flex;gap:38px;align-items:center}
+.nav.left{justify-self:start}
+.nav.right{justify-self:end}
+.nav a{
+  font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--cream);font-weight:400;
+  position:relative;padding:10px 0;
+  transition:color .3s ease;
+}
+.nav a::after{
+  content:"";position:absolute;left:50%;bottom:4px;transform:translateX(-50%);
+  width:0;height:1px;background:var(--accent);transition:width .4s ease;
+}
+.nav a:hover{color:var(--accent-light)}
+.nav a:hover::after{width:100%}
+
+.icon-btn{
+  width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid var(--line);
+  transition:all .35s ease;
+  background:transparent;
+  color:var(--cream);
+}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+.icon-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.4}
+
+.mobile-toggle{display:none}
+@media (max-width:900px){
+  .nav.left,.nav.right{display:none}
+  .header-inner{grid-template-columns:auto 1fr auto}
+  .header-logo{justify-self:start}
+  .mobile-toggle{display:grid}
+}
+
+/* ============ HERO ============ */
+.hero{
+  padding:0;
+  background:var(--bg);
+  position:relative;
+  overflow:hidden;
+  border-bottom:1px solid var(--line-soft);
+  display:block;
+}
+.hero-image-full{
+  position:relative;
+  width:100%;
+  display:block;
+  background:#0b0805;
+  overflow:hidden;
+}
+.hero-image-full img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:cover;
+  animation:kenburns 24s ease-in-out infinite alternate;
+}
+@keyframes kenburns{
+  0%{transform:scale(1) translate(0,0)}
+  100%{transform:scale(1.06) translate(-1%,-0.5%)}
+}
+.hero-image-full::before{
+  content:"";position:absolute;inset:0;z-index:2;
+  background:
+    linear-gradient(180deg, rgba(7,5,3,.35) 0%, transparent 28%, transparent 60%, rgba(7,5,3,.78) 100%),
+    linear-gradient(90deg, rgba(7,5,3,.4) 0%, transparent 30%, transparent 70%, rgba(7,5,3,.4) 100%);
+  pointer-events:none;
+}
+.hero-image-full::after{
+  content:"";position:absolute;inset:18px;z-index:3;
+  border:1px solid rgba(212,164,100,.32);
+  pointer-events:none;
+  border-radius:var(--r-sm);
+}
+@media (max-width:900px){
+  .hero-image-full::after{inset:10px}
+}
+
+.hero-overlay-top{
+  position:absolute;left:0;right:0;top:0;z-index:4;
+  padding:34px 56px 0;
+  display:flex;justify-content:center;
+  pointer-events:none;
+}
+.hero-overlay-top .gold-line{color:var(--accent-light);font-size:10px}
+.hero-overlay-top .gold-line::before,
+.hero-overlay-top .gold-line::after{background:linear-gradient(90deg,transparent,var(--accent-light),transparent)}
+
+.hero-headline{
+  position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
+  z-index:4;text-align:center;padding:0 6vw;pointer-events:none;
+}
+.hero-headline h1{
+  font-family:'Italiana',serif;
+  font-size:clamp(48px,8vw,128px);
+  font-weight:300;
+  letter-spacing:.06em;
+  color:var(--ivory);
+  text-shadow:0 4px 40px rgba(0,0,0,.65);
+  line-height:1.02;
+}
+.hero-headline .sub{
+  margin-top:18px;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(16px,1.6vw,22px);
+  color:var(--accent-light);
+  letter-spacing:.12em;
+  font-weight:300;
+}
+
+.hero-overlay-bar{
+  position:absolute;left:0;right:0;bottom:0;z-index:4;
+  padding:26px 56px;
+  display:flex;justify-content:space-between;align-items:center;gap:24px;
+  background:linear-gradient(180deg,transparent,rgba(7,5,3,.65));
+}
+.hero-tags{display:flex;gap:30px;flex-wrap:wrap;color:var(--cream);font-size:11px;letter-spacing:.3em;text-transform:uppercase}
+.hero-tags span{position:relative;padding-left:18px}
+.hero-tags span::before{content:"";position:absolute;left:0;top:50%;width:8px;height:1px;background:var(--accent)}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:14px;
+  padding:14px 28px;border:1px solid var(--accent);
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ivory);
+  background:rgba(212,164,100,.06);
+  transition:all .35s ease;
+  cursor:pointer;
+}
+.hero-cta:hover{background:var(--accent);color:var(--bg-deep)}
+.hero-cta .arrow{font-size:14px}
+
+@media (max-width:900px){
+  .hero-overlay-bar{padding:18px 22px;flex-direction:column;align-items:flex-start;gap:14px}
+  .hero-overlay-top{padding:18px 22px 0}
+  .hero-headline{padding:0 22px}
+}
+
+/* grain overlay on hero */
+.hero-image-full .grain{
+  position:absolute;inset:0;z-index:5;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode:overlay;opacity:.08;
+}
+
+/* ============ INTRO ============ */
+.intro{padding:140px 0 100px}
+.intro-grid{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:90px;align-items:center;
+}
+.intro-text .overline{margin-bottom:22px;display:inline-block}
+.intro-text h2{
+  font-size:clamp(40px,5vw,72px);font-weight:300;letter-spacing:-.005em;margin-bottom:30px;
+}
+.intro-text h2 em{font-style:italic;color:var(--accent-light);font-family:'Cormorant Garamond',serif}
+.intro-text p{font-size:16px;line-height:1.85;color:var(--cream);margin-bottom:18px;max-width:560px}
+.intro-text p:last-of-type{margin-bottom:34px}
+.text-cta{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);
+  position:relative;padding-bottom:8px;
+  transition:color .3s ease;
+}
+.text-cta::after{
+  content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--accent);
+  transform-origin:left;transition:transform .5s ease;
+}
+.text-cta:hover{color:var(--accent-light)}
+.text-cta:hover::after{transform:scaleX(.5)}
+
+.intro-image{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:var(--r-sm)}
+.intro-image img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
+.intro-image:hover img{transform:scale(1.04)}
+.intro-image::after{
+  content:"";position:absolute;inset:14px;border:1px solid rgba(212,164,100,.4);pointer-events:none;
+}
+@media (max-width:900px){.intro-grid{grid-template-columns:1fr;gap:60px}}
+
+/* ============ CATEGORIES ============ */
+.categories{background:var(--bg-raised);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.section-head{text-align:center;margin-bottom:80px}
+.section-head .gold-line{margin-bottom:22px}
+.section-head h2{font-size:clamp(36px,4.5vw,60px);font-weight:300;margin-bottom:18px}
+.section-head p{color:var(--muted);font-size:15px;max-width:580px;margin:0 auto;line-height:1.85}
+.cat-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+}
+@media (max-width:1100px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.cat-grid{grid-template-columns:1fr}}
+.cat{
+  position:relative;background:var(--bg-elevated);border:1px solid var(--line-soft);
+  border-radius:var(--r-sm);overflow:hidden;
+  transition:transform .6s ease,border-color .6s ease;
+}
+.cat:hover{transform:translateY(-6px);border-color:var(--accent)}
+.cat-image{aspect-ratio:4/5;overflow:hidden;position:relative}
+.cat-image img{width:100%;height:100%;object-fit:cover;transition:transform 1s ease;filter:contrast(1.04) saturate(.95)}
+.cat:hover .cat-image img{transform:scale(1.06)}
+.cat-image::after{
+  content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(7,5,3,.75));
+}
+.cat-body{padding:26px 24px 30px;text-align:center}
+.cat-body .num{
+  display:inline-block;font-family:'Italiana',serif;color:var(--accent);
+  font-size:11px;letter-spacing:.4em;margin-bottom:10px;
+}
+.cat-body h3{font-size:22px;margin-bottom:10px}
+.cat-body p{color:var(--muted);font-size:13px;line-height:1.7}
+
+/* ============ SIGNATURE ============ */
+.signature .section-head{margin-bottom:90px}
+.sig-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+@media (max-width:1100px){.sig-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.sig-grid{grid-template-columns:1fr}}
+.sig{
+  position:relative;cursor:pointer;
+}
+.sig-image{aspect-ratio:1/1;overflow:hidden;position:relative;border-radius:var(--r-sm);border:1px solid var(--line-soft)}
+.sig-image img{width:100%;height:100%;object-fit:cover;transition:transform 1s ease;filter:contrast(1.05) saturate(.95)}
+.sig:hover .sig-image img{transform:scale(1.05)}
+.sig-meta{padding:20px 6px 0}
+.sig-meta .num{
+  font-family:'Italiana',serif;color:var(--accent);
+  font-size:11px;letter-spacing:.4em;display:block;margin-bottom:8px;
+}
+.sig-meta h3{font-size:22px;margin-bottom:6px;color:var(--ivory)}
+.sig-meta .price{
+  font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ============ ATELIER / OVER UNS ============ */
+.atelier{background:var(--bg-deep)}
+.atelier-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center}
+.atelier-image{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:var(--r-sm)}
+.atelier-image img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s ease;filter:contrast(1.05) saturate(.92)}
+.atelier-image:hover img{transform:scale(1.04)}
+.atelier-image::after{
+  content:"";position:absolute;inset:14px;border:1px solid rgba(212,164,100,.4);pointer-events:none;
+}
+.atelier-text .overline{margin-bottom:22px;display:inline-block}
+.atelier-text h2{font-size:clamp(40px,5vw,68px);font-weight:300;margin-bottom:30px}
+.atelier-text h2 em{font-style:italic;color:var(--accent-light);font-family:'Cormorant Garamond',serif}
+.atelier-text p{color:var(--cream);font-size:16px;line-height:1.85;max-width:540px;margin-bottom:18px}
+.atelier-text .signature-line{
+  margin-top:40px;font-family:'Italiana',serif;letter-spacing:.18em;
+  color:var(--accent);font-size:13px;
+}
+@media (max-width:900px){.atelier-grid{grid-template-columns:1fr;gap:54px}}
+
+/* ============ DETAIL GRID ============ */
+.gallery{background:var(--bg)}
+.gal-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:160px;gap:14px;
+}
+.gal-item{position:relative;overflow:hidden;border-radius:var(--r-sm)}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s ease;filter:contrast(1.04) saturate(.92)}
+.gal-item:hover img{transform:scale(1.06)}
+.gal-item::after{
+  content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(7,5,3,.45));pointer-events:none;
+}
+.gal-item.t1{grid-column:span 2;grid-row:span 2}
+.gal-item.t2{grid-column:span 2;grid-row:span 2}
+.gal-item.t3{grid-column:span 2;grid-row:span 3}
+.gal-item.t4{grid-column:span 3;grid-row:span 2}
+.gal-item.t5{grid-column:span 3;grid-row:span 2}
+@media (max-width:900px){
+  .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px}
+  .gal-item.t1,.gal-item.t2,.gal-item.t3,.gal-item.t4,.gal-item.t5{grid-column:span 2;grid-row:span 1}
+}
+
+/* ============ TESTIMONIALS ============ */
+.testimonials{
+  background:var(--bg-raised);
+  border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);
+}
+.t-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:48px}
+@media (max-width:900px){.t-grid{grid-template-columns:1fr}}
+.t-card{
+  padding:48px 44px;border:1px solid var(--line-soft);
+  border-radius:var(--r-sm);background:var(--bg-elevated);
+  position:relative;
+}
+.t-card::before{
+  content:"\201C";font-family:'Italiana',serif;
+  position:absolute;top:14px;left:24px;font-size:80px;color:var(--accent);opacity:.32;line-height:1;
+}
+.t-card .stars{color:var(--accent);letter-spacing:.2em;margin-bottom:18px;font-size:14px}
+.t-card blockquote{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:22px;line-height:1.55;color:var(--ivory);font-weight:300;margin-bottom:22px;
+}
+.t-card cite{
+  font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--accent);font-style:normal;
+}
+
+/* ============ HOURS / VISIT ============ */
+.visit{background:var(--bg-deep);position:relative;overflow:hidden}
+.visit::before{
+  content:"";position:absolute;inset:0;
+  background-image:url('assets/herbs.webp');background-size:cover;background-position:center;
+  opacity:.12;filter:contrast(1.1) saturate(.7);
+}
+.visit-inner{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+@media (max-width:900px){.visit-inner{grid-template-columns:1fr;gap:60px}}
+.visit h2{font-size:clamp(40px,5vw,64px);font-weight:300;margin-bottom:30px}
+.visit p.lead{color:var(--cream);font-size:16px;line-height:1.85;margin-bottom:36px;max-width:520px}
+.hours-table{width:100%;max-width:480px;border-top:1px solid var(--line-soft)}
+.hours-row{
+  display:flex;justify-content:space-between;
+  padding:18px 0;border-bottom:1px solid var(--line-soft);
+  font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+}
+.hours-row .day{color:var(--cream)}
+.hours-row .time{color:var(--accent-light);font-family:'Italiana',serif;letter-spacing:.12em}
+
+.visit-side{
+  background:var(--bg-elevated);
+  border:1px solid var(--line);
+  padding:60px 50px;
+  border-radius:var(--r-sm);
+  position:relative;
+}
+.visit-side::after{
+  content:"";position:absolute;inset:14px;border:1px solid rgba(212,164,100,.18);pointer-events:none;border-radius:var(--r-sm);
+}
+.visit-side .overline{margin-bottom:18px;display:block}
+.visit-side h3{font-size:32px;margin-bottom:18px}
+.visit-side .addr{color:var(--cream);line-height:1.85;margin-bottom:30px;font-size:15px}
+.visit-side .addr span{display:block}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:14px;
+  padding:18px 36px;
+  background:var(--accent);
+  border:1px solid var(--accent);
+  color:var(--bg-deep);font-weight:500;
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  transition:all .35s ease;cursor:pointer;
+}
+.btn-primary:hover{background:var(--accent-light);border-color:var(--accent-light)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:14px;
+  padding:17px 34px;margin-left:10px;
+  background:transparent;border:1px solid var(--accent);
+  color:var(--ivory);
+  font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  transition:all .35s ease;cursor:pointer;
+}
+.btn-secondary:hover{background:rgba(212,164,100,.12);color:var(--accent-light)}
+@media (max-width:520px){.btn-secondary{margin-left:0;margin-top:14px}}
+
+/* ============ FOOTER ============ */
+.site-footer{background:#050402;border-top:1px solid var(--line-soft);padding:90px 0 40px}
+.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:60px;margin-bottom:60px}
+@media (max-width:900px){.f-grid{grid-template-columns:1fr;gap:40px}}
+.f-brand .mark{font-family:'Italiana',serif;font-size:30px;letter-spacing:.18em;color:var(--ivory);text-transform:uppercase;margin-bottom:6px;display:block}
+.f-brand .submark{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:24px}
+.f-brand p{color:var(--muted);font-size:14px;line-height:1.85;max-width:380px}
+.f-col h4{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:22px}
+.f-col a, .f-col p{display:block;color:var(--cream);font-size:14px;line-height:2;transition:color .3s ease}
+.f-col a:hover{color:var(--accent-light)}
+.f-bottom{padding-top:34px;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* parallax (desktop only) */
+@media (min-width:1100px){
+  .visit::before{background-attachment:fixed}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="container inner">
+    <div class="left">Indochine Küche · Mainz Innenstadt</div>
+    <div class="right">
+      <span class="hide-mobile">Franziskanerstraße 5 · 55116 Mainz</span>
+      <a href="https://www.instagram.com/pho_viet_mainz/" target="_blank" rel="noopener">@pho_viet_mainz</a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container header-inner">
+    <nav class="nav left">
+      <a href="#karte">Karte</a>
+      <a href="#atelier">Über Uns</a>
+      <a href="#galerie">Galerie</a>
+    </nav>
+    <a href="#" class="header-logo">
+      <span class="mark">Pho Viet</span>
+      <span class="submark">Mainz · Indochine</span>
+    </a>
+    <nav class="nav right">
+      <a href="#besuch">Reservieren</a>
+      <a href="#oeffnungszeiten">Öffnungszeiten</a>
+      <a href="https://www.instagram.com/pho_viet_mainz/" target="_blank" rel="noopener" class="icon-btn" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".7" fill="currentColor"/></svg>
+      </a>
+    </nav>
+    <button class="icon-btn mobile-toggle" aria-label="Menü">
+      <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-image-full">
+    <picture>
+      <source srcset="assets/hero.webp" type="image/webp">
+      <img src="assets/hero.webp" alt="Dampfende Phở-Schale auf dunklem Holz mit Thai-Basilikum, Limette und Chili" loading="eager" fetchpriority="high" />
+    </picture>
+    <div class="grain"></div>
+
+    <div class="hero-overlay-top">
+      <span class="gold-line">Indochine · Seit 2023</span>
+    </div>
+
+    <div class="hero-headline">
+      <h1>Pho Viet</h1>
+      <div class="sub">— Vietnamesische Küche im Herzen von Mainz —</div>
+    </div>
+
+    <div class="hero-overlay-bar">
+      <div class="hero-tags">
+        <span>Frisch</span>
+        <span>Vegan-fähig</span>
+        <span>Hausgemacht</span>
+      </div>
+      <a href="#karte" class="hero-cta">Karte entdecken <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="container intro-grid">
+    <div class="intro-text reveal">
+      <span class="overline">Willkommen</span>
+      <h2 class="serif">Wo Vietnam und <em>Mainz</em> sich treffen.</h2>
+      <p>In der Franziskanerstraße, zwei Schritte vom Dom entfernt, kocht Trong Anh Fu seit November 2023, was er von seinen Großeltern gelernt hat — und ergänzt es um die Aromen, die Südostasien zu einer der lebendigsten Küchen der Welt machen.</p>
+      <p>Phở-Brühen ziehen bei uns über Stunden, das Gemüse kommt morgens vom Markt, und alles, was als vegan auf der Karte steht, ist auch wirklich von Anfang bis Ende vegan gedacht — kein Add-on, sondern Teil des Konzepts.</p>
+      <a href="#atelier" class="text-cta">Unsere Geschichte <span>→</span></a>
+    </div>
+    <div class="intro-image reveal">
+      <picture>
+        <source srcset="assets/noodles.webp" type="image/webp">
+        <img src="assets/noodles.webp" alt="Stäbchen heben dampfende Reisnudeln aus einer Phở-Schale" loading="lazy" />
+      </picture>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="karte">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="gold-line">Die Karte</div>
+      <h2 class="serif">Vier Welten <em>auf einem Tisch</em></h2>
+      <p>Klassische Phở-Suppen, gebratene Reis- und Nudelgerichte, frische Sommerrollen und ein voll ausgebauter veganer Bereich — jedes Gericht wird auf Bestellung zubereitet.</p>
+    </div>
+    <div class="cat-grid">
+      <article class="cat reveal">
+        <div class="cat-image">
+          <picture><source srcset="assets/hero.webp" type="image/webp"><img src="assets/hero.webp" alt="Phở Bò" loading="lazy" /></picture>
+        </div>
+        <div class="cat-body">
+          <span class="num">I</span>
+          <h3 class="serif">Phở</h3>
+          <p>Die Seele Vietnams. 12 Stunden Brühe, frische Reisnudeln, Rind oder Huhn — oder vegan mit geräuchertem Tofu.</p>
+        </div>
+      </article>
+      <article class="cat reveal">
+        <div class="cat-image">
+          <picture><source srcset="assets/buncha.webp" type="image/webp"><img src="assets/buncha.webp" alt="Bún" loading="lazy" /></picture>
+        </div>
+        <div class="cat-body">
+          <span class="num">II</span>
+          <h3 class="serif">Bún & Reis</h3>
+          <p>Bún Chả, Bún Bò Nam Bộ, Cơm Tấm — gegrillt, frittiert oder gebraten, immer mit fein abgestimmtem Nước Chấm.</p>
+        </div>
+      </article>
+      <article class="cat reveal">
+        <div class="cat-image">
+          <picture><source srcset="assets/summerrolls.webp" type="image/webp"><img src="assets/summerrolls.webp" alt="Sommerrollen" loading="lazy" /></picture>
+        </div>
+        <div class="cat-body">
+          <span class="num">III</span>
+          <h3 class="serif">Vorspeisen</h3>
+          <p>Gỏi Cuốn, knusprige Frühlingsrollen, Bánh Xèo — handgerollt, mit Erdnusssauce und frischen Kräutern.</p>
+        </div>
+      </article>
+      <article class="cat reveal">
+        <div class="cat-image">
+          <picture><source srcset="assets/herbs.webp" type="image/webp"><img src="assets/herbs.webp" alt="Vegan" loading="lazy" /></picture>
+        </div>
+        <div class="cat-body">
+          <span class="num">IV</span>
+          <h3 class="serif">Vegan</h3>
+          <p>Komplette zweite Karte. Tofu-Phở, Bún Chay, Curry, Rollen — keine Kompromisse, keine Ersatzaromen.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNATURE -->
+<section class="signature">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="gold-line">Signature</div>
+      <h2 class="serif">Vier Klassiker, <em>die jeder kennen sollte</em></h2>
+      <p>Wenn Sie zum ersten Mal hier sind — beginnen Sie mit diesen.</p>
+    </div>
+    <div class="sig-grid">
+      <article class="sig reveal">
+        <div class="sig-image">
+          <picture><source srcset="assets/hero.webp" type="image/webp"><img src="assets/hero.webp" alt="Phở Bò" loading="lazy" /></picture>
+        </div>
+        <div class="sig-meta">
+          <span class="num">I · Suppe</span>
+          <h3 class="serif">Phở Bò</h3>
+          <span class="price">Ab 13,90 €</span>
+        </div>
+      </article>
+      <article class="sig reveal">
+        <div class="sig-image">
+          <picture><source srcset="assets/buncha.webp" type="image/webp"><img src="assets/buncha.webp" alt="Bún Chả" loading="lazy" /></picture>
+        </div>
+        <div class="sig-meta">
+          <span class="num">II · Hauptgang</span>
+          <h3 class="serif">Bún Chả</h3>
+          <span class="price">Ab 14,50 €</span>
+        </div>
+      </article>
+      <article class="sig reveal">
+        <div class="sig-image">
+          <picture><source srcset="assets/summerrolls.webp" type="image/webp"><img src="assets/summerrolls.webp" alt="Gỏi Cuốn" loading="lazy" /></picture>
+        </div>
+        <div class="sig-meta">
+          <span class="num">III · Vorspeise</span>
+          <h3 class="serif">Gỏi Cuốn</h3>
+          <span class="price">Ab 6,90 €</span>
+        </div>
+      </article>
+      <article class="sig reveal">
+        <div class="sig-image">
+          <picture><source srcset="assets/banhmi.webp" type="image/webp"><img src="assets/banhmi.webp" alt="Bánh Mì" loading="lazy" /></picture>
+        </div>
+        <div class="sig-meta">
+          <span class="num">IV · To Go</span>
+          <h3 class="serif">Bánh Mì</h3>
+          <span class="price">Ab 7,50 €</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ATELIER -->
+<section class="atelier" id="atelier">
+  <div class="container atelier-grid">
+    <div class="atelier-image reveal">
+      <picture>
+        <source srcset="assets/interior.webp" type="image/webp">
+        <img src="assets/interior.webp" alt="Innenraum von Pho Viet — warmes Licht, dunkles Holz" loading="lazy" />
+      </picture>
+    </div>
+    <div class="atelier-text reveal">
+      <span class="overline">Über Uns</span>
+      <h2 class="serif">Eine Familie, <em>eine Tradition</em>, eine Stadt.</h2>
+      <p>Die Räume in der Franziskanerstraße standen drei Jahre leer, nachdem die Pandemie den Vorgänger schloss. 2023 hat Trong Anh Fu sie zum Leben erweckt — mit dunklem Holz, warmem Licht und dem unverkennbaren Duft frischer Phở-Brühe.</p>
+      <p>Was uns von anderen unterscheidet: Wir kochen, was wir selbst essen würden. Keine glutamatschweren Abkürzungen, keine Eintopfsoßen über alles. Jedes Gericht hat seinen eigenen Charakter — so, wie es in den Garküchen Hanois sein sollte.</p>
+      <p>Die Gäste danken es uns: 4,8 Sterne, knapp 1.000 Bewertungen, und an manchen Mittagen eine Schlange bis vor die Tür.</p>
+      <div class="signature-line">— Trong Anh Fu, Inhaber</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="galerie">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="gold-line">Eindrücke</div>
+      <h2 class="serif">Aus unserer <em>Küche</em></h2>
+      <p>Frische Zutaten, warmes Licht, ehrliche Handarbeit.</p>
+    </div>
+    <div class="gal-grid">
+      <div class="gal-item t1 reveal"><picture><source srcset="assets/hero.webp" type="image/webp"><img src="assets/hero.webp" alt="Phở" loading="lazy"/></picture></div>
+      <div class="gal-item t2 reveal"><picture><source srcset="assets/herbs.webp" type="image/webp"><img src="assets/herbs.webp" alt="Frische Kräuter" loading="lazy"/></picture></div>
+      <div class="gal-item t3 reveal"><picture><source srcset="assets/summerrolls.webp" type="image/webp"><img src="assets/summerrolls.webp" alt="Sommerrollen" loading="lazy"/></picture></div>
+      <div class="gal-item t4 reveal"><picture><source srcset="assets/noodles.webp" type="image/webp"><img src="assets/noodles.webp" alt="Reisnudeln" loading="lazy"/></picture></div>
+      <div class="gal-item t5 reveal"><picture><source srcset="assets/buncha.webp" type="image/webp"><img src="assets/buncha.webp" alt="Bún Chả" loading="lazy"/></picture></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="gold-line">Stimmen</div>
+      <h2 class="serif">Was unsere <em>Gäste sagen</em></h2>
+      <p>4,8 Sterne · knapp 1.000 Bewertungen auf Google und neotaste.</p>
+    </div>
+    <div class="t-grid">
+      <article class="t-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>Sehr freundlicher und schneller Service, eine umfangreiche Auswahl — und das Essen wird sehr frisch und schnell zubereitet.</blockquote>
+        <cite>— Tripadvisor · März 2025</cite>
+      </article>
+      <article class="t-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>Gute Qualität, faire Preise, freundlicher Service und ein schöner Außenbereich — perfekt für die Mittagspause in der Innenstadt.</blockquote>
+        <cite>— Tripadvisor · Juli 2025</cite>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT / HOURS -->
+<section class="visit" id="besuch">
+  <div class="container visit-inner">
+    <div class="reveal" id="oeffnungszeiten">
+      <span class="overline">Besuchen Sie uns</span>
+      <h2 class="serif">Geöffnet sieben<br>Tage die Woche.</h2>
+      <p class="lead">Mittagstisch ab 11 Uhr, Abendservice bis 21:30. Tische lassen sich telefonisch oder direkt vor Ort reservieren — am Wochenende empfehlen wir es.</p>
+      <div class="hours-table">
+        <div class="hours-row"><span class="day">Montag – Freitag</span><span class="time">11:00 – 21:30</span></div>
+        <div class="hours-row"><span class="day">Samstag</span><span class="time">11:00 – 21:30</span></div>
+        <div class="hours-row"><span class="day">Sonntag</span><span class="time">12:00 – 21:30</span></div>
+      </div>
+    </div>
+    <aside class="visit-side reveal">
+      <span class="overline">Adresse</span>
+      <h3 class="serif">Im Herzen der Mainzer Altstadt</h3>
+      <p class="addr">
+        <span><strong>Pho Viet</strong></span>
+        <span>Franziskanerstraße 5</span>
+        <span>55116 Mainz</span>
+        <span style="margin-top:14px;color:var(--muted);font-size:13px">Fußläufig zum Dom · 4 Min. vom Markt</span>
+      </p>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Franziskanerstraße+5,+55116+Mainz" target="_blank" rel="noopener" class="btn-primary">Route planen <span>→</span></a>
+      <a href="https://www.instagram.com/pho_viet_mainz/" target="_blank" rel="noopener" class="btn-secondary">Instagram</a>
+    </aside>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="f-grid">
+      <div class="f-brand">
+        <span class="mark">Pho Viet</span>
+        <span class="submark">Mainz · Indochine</span>
+        <p>Vietnamesische und südostasiatische Küche im Herzen von Mainz. Frisch, ehrlich, mit einem ausgebauten veganen Konzept.</p>
+      </div>
+      <div class="f-col">
+        <h4>Kontakt</h4>
+        <p>Franziskanerstraße 5</p>
+        <p>55116 Mainz</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Franziskanerstraße+5,+55116+Mainz" target="_blank" rel="noopener">Route planen</a>
+      </div>
+      <div class="f-col">
+        <h4>Folgen</h4>
+        <a href="https://www.instagram.com/pho_viet_mainz/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/p/Pho-Viet-61581090782869/" target="_blank" rel="noopener">Facebook</a>
+        <a href="#besuch">Reservieren</a>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© <span id="y"></span> Pho Viet · Trong Anh Fu</span>
+      <span>Made with care in Mainz</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
