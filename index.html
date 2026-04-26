@@ -619,6 +619,93 @@ section{padding:140px 0;position:relative}
   .bowl-scroll__stage{order:1;height:auto;flex:1;min-height:0}
   .bowl-canvas{height:min(55vh,520px)}
 }
+
+/* ============ MOBILE: bowl-scroll AS hero ============ */
+.bowl-scroll__mobile-cta{display:none}
+.bowl-scroll__hint{display:none}
+@media (max-width:768px){
+  /* Hide original hero, bowl-scroll takes its place */
+  .hero{display:none}
+
+  /* Tighter, hero-like layout */
+  .bowl-scroll{height:160vh}
+  .bowl-scroll__sticky{
+    padding:18px 0 28px;
+    gap:8px;
+    grid-template-rows:1fr auto;
+  }
+  .bowl-scroll__stage{order:1;flex:1;min-height:0;align-self:stretch}
+  .bowl-scroll__text{
+    order:2;text-align:center;margin:0 auto;padding:0 24px;
+    max-width:560px;
+  }
+  .bowl-scroll__text h2{font-size:clamp(34px,8.4vw,46px);margin:0 0 12px}
+  .bowl-scroll__text p{font-size:14px;line-height:1.65;margin-bottom:0}
+  /* Hide the long descriptive paragraphs on mobile to keep it hero-tight */
+  .bowl-scroll__text p:not(.bowl-scroll__hint){display:none}
+  .bowl-scroll__hint{display:block;color:var(--muted);font-size:11px;letter-spacing:.32em;text-transform:uppercase;margin-top:6px}
+  .bowl-scroll__progress{margin-top:14px}
+  .bowl-canvas{height:min(58vh,540px)}
+
+  /* Hero-style CTA below the bowl */
+  .bowl-scroll__mobile-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-top:14px;
+    padding:13px 26px;
+    border:1px solid var(--accent);
+    color:var(--ivory);
+    background:transparent;
+    font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+    border-radius:999px;
+    transition:background .3s ease,color .3s ease;
+  }
+  .bowl-scroll__mobile-cta:hover,
+  .bowl-scroll__mobile-cta:active{background:var(--accent);color:var(--bg-deep)}
+}
+
+/* ============ MOBILE: swipeable carousels (categories & signature) ============ */
+@media (max-width:768px){
+  .cat-grid, .sig-grid{
+    display:flex !important;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    overflow-y:hidden;
+    gap:16px;
+    padding:0 6vw 28px;
+    margin:0 -6vw;
+    scroll-snap-type:x mandatory;
+    scroll-padding-left:6vw;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .cat-grid::-webkit-scrollbar,
+  .sig-grid::-webkit-scrollbar{display:none}
+  .cat, .sig{
+    flex:0 0 84%;
+    min-width:0;
+    scroll-snap-align:start;
+  }
+  .cat:last-child, .sig:last-child{margin-right:6vw}
+
+  /* Subtle "swipe me" hint */
+  .cat-grid::after, .sig-grid::after{content:""}
+  .swipe-hint{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:4px;
+    color:var(--muted);
+    font-size:10px;letter-spacing:.36em;text-transform:uppercase;
+  }
+  .swipe-hint::before{content:"←  Wischen  →"}
+}
+@media (min-width:769px){
+  .swipe-hint{display:none}
+}
 </style>
 </head>
 <body>
@@ -695,11 +782,13 @@ section{padding:140px 0;position:relative}
       <h2 class="serif">Vier Stunden <em>Brühe.</em><br/>Eine Schale Phở.</h2>
       <p>Rinderknochen, Sternanis, Zimt, Ingwer, Koriandersamen — geduldig zu Bouillon gezogen, im letzten Moment komplettiert mit frischen Reisnudeln, Thai-Basilikum, Limette und blutigem Tafelspitz, der erst in der Schale gar wird.</p>
       <p>Scrollen Sie und sehen Sie zu, wie sie entsteht.</p>
+      <p class="bowl-scroll__hint">Scrollen, um sie zu bauen</p>
       <div class="bowl-scroll__progress" aria-hidden="true">
         <span>I</span>
         <span class="bowl-scroll__progress-track"><span class="bowl-scroll__progress-bar"></span></span>
         <span>VIII</span>
       </div>
+      <a href="#karte" class="bowl-scroll__mobile-cta">Karte entdecken <span aria-hidden="true">→</span></a>
     </div>
     <div class="bowl-scroll__stage">
       <canvas class="bowl-canvas" width="720" height="960" aria-hidden="true"></canvas>
@@ -776,6 +865,7 @@ section{padding:140px 0;position:relative}
         </div>
       </article>
     </div>
+    <div class="swipe-hint" aria-hidden="true"></div>
   </div>
 </section>
 
@@ -829,6 +919,7 @@ section{padding:140px 0;position:relative}
         </div>
       </article>
     </div>
+    <div class="swipe-hint" aria-hidden="true"></div>
   </div>
 </section>
 
